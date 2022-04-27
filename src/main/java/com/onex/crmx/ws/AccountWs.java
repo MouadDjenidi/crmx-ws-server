@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +22,8 @@ public class AccountWs extends BaseWs<IAccountService<Account>>{
 	
 	@RequestMapping(value = "/account" , method = RequestMethod.GET)
 	@ResponseBody
-	List<Account> getAccounts() throws BaseServiceException{
-		return service.getAll();
+	ResponseEntity<List<Account>> getAccounts() throws BaseServiceException{
+		return ResponseEntity.ok(service.getAll());
 	}
 	
 	@RequestMapping(value = "/account/{id}" , method = RequestMethod.GET )

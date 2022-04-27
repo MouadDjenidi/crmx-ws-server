@@ -22,11 +22,12 @@ import lombok.Data;
 @Data
 public class Account{
 	
+	
 	@Id
 	@SequenceGenerator(name = "account_sequence", sequenceName = "account_sequence", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_sequence")
 	@Column(name = "sys_account_id", updatable = false)
-	private Long accountId;
+	private Long Id;
 
 	@Column(name = "account_name", nullable = false)
 	private String accountName;

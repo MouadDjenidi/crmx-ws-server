@@ -1,7 +1,7 @@
 package com.onex.crmx.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -37,13 +37,13 @@ public class AccountService implements IAccountService<Account> {
 
 	@Override
 	public Account save(Account Object) {
-		try {
-			Object = repository.save(Object);
-			return Object;
-		} catch (Exception e) {
-		   e.printStackTrace();
-		}
-		return null;
+		
+				Optional<Account> accountOptional =  repository.findAccountByName(Object.getAccountName());
+				if(accountOptional.isPresent()) {
+					throw new IllegalStateException("Account name exists");
+				}
+				Object = repository.save(Object);
+				return Object;	
 	}
 
 	@Override
